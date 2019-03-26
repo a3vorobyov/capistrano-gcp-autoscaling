@@ -1,0 +1,29 @@
+require: rubocop-rspec
+
+AllCops:
+  DisplayCopNames: true
+  Include:
+    - "**/*.rb"
+    - Gemfile
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/LineLength:
+  Max: 120
+
+RSpec/ExampleLength:
+  Max: 10
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
