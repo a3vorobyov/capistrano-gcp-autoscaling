@@ -8,6 +8,7 @@ module Capistrano
           INSTANCE_PATTERN = %r{/instances/[\w-]+}.freeze
           ZONE_PATTERN = %r{/zones/[\w-]+}.freeze
           SEPARATOR = '/'.freeze
+          RUNNING_STATUS = 'RUNNING'.freeze
 
           def initialize(compute_service, managed_instance, options = {})
             @compute_service = compute_service
@@ -19,12 +20,20 @@ module Capistrano
             instance.network_interfaces.first.network_ip
           end
 
+          def created_at
+            Time.parse(instance.creation_timestamp)
+          end
+
+          def running?
+            instance.status == RUNNING_STATUS
+          end
+
           private
 
           attr_reader :compute_service, :managed_instance, :options
 
           def instance
-            compute_service.get_instance(options.fetch(:gcp_project_id), instance_zone, instance_name)
+            @instance ||= compute_service.get_instance(options.fetch(:gcp_project_id), instance_zone, instance_name)
           end
 
           def instance_zone

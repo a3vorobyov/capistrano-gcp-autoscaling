@@ -11,7 +11,7 @@ module Capistrano
           end
 
           def instances
-            group_manager.managed_instances.map(&method(:instance_for))
+            group_manager.managed_instances.map(&method(:instance_for)).select(&:running?).sort_by(&:created_at)
           end
 
           private
@@ -30,8 +30,7 @@ module Capistrano
             compute_service.list_region_instance_group_manager_managed_instances(
               options.fetch(:gcp_project_id),
               options.fetch(:gcp_region),
-              options.fetch(:group_manager_name),
-              filter: options.fetch(:gcp_filter)
+              options.fetch(:group_manager_name)
             )
           end
         end

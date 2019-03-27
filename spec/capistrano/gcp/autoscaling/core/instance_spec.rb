@@ -45,11 +45,62 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::Instance do
     before do
       allow(compute_service).to receive(:get_instance)
         .with(options.fetch(:gcp_project_id), instance_zone, instance_name)
+        .once
         .and_return instance
     end
 
     it 'is expected to return network ip' do
+      subject.network_ip
       expect(subject.network_ip).to eq '10.2.0.15'
+    end
+  end
+
+  describe '#created_at' do
+    let(:instance_zone) { 'us-east-1-b' }
+    let(:instance_name) { 'instance-1' }
+    let(:instance) { Google::Apis::ComputeV1::Instance.new(creation_timestamp: '2019-03-26T06:29:06.000-07:00') }
+
+    before do
+      allow(compute_service).to receive(:get_instance)
+        .with(options.fetch(:gcp_project_id), instance_zone, instance_name)
+        .once
+        .and_return instance
+    end
+
+    it 'is expected to return created at' do
+      subject.created_at
+      expect(subject.created_at).to eq Time.parse(instance.creation_timestamp)
+    end
+  end
+
+  describe '#running?' do
+    let(:instance_zone) { 'us-east-1-b' }
+    let(:instance_name) { 'instance-1' }
+    let(:instance) { Google::Apis::ComputeV1::Instance.new(status: status) }
+
+    before do
+      allow(compute_service).to receive(:get_instance)
+        .with(options.fetch(:gcp_project_id), instance_zone, instance_name)
+        .once
+        .and_return instance
+    end
+
+    context 'when a status is RUNNING' do
+      let(:status) { described_class::RUNNING_STATUS }
+
+      it 'is expected to be true' do
+        subject.running?
+        expect(subject.running?).to be true
+      end
+    end
+
+    context 'when a status is not RUNNING' do
+      let(:status) { 'STOPPING' }
+
+      it 'is expected to be false' do
+        subject.running?
+        expect(subject.running?).to be false
+      end
     end
   end
 end

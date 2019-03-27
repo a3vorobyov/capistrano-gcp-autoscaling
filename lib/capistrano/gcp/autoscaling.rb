@@ -22,7 +22,6 @@ def instance_group_manager(group_manager_name, properties = {})
     compute_service,
     gcp_project_id: fetch(:gcp_project_id),
     gcp_region: fetch(:gcp_region),
-    gcp_filter: fetch(:gcp_filter),
     group_manager_name: group_manager_name
   )
 
