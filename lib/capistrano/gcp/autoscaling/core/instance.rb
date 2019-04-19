@@ -9,6 +9,7 @@ module Capistrano
           ZONE_PATTERN = %r{/zones/[\w-]+}.freeze
           SEPARATOR = '/'.freeze
           RUNNING_STATUS = 'RUNNING'.freeze
+          NONE_ACTION = 'NONE'.freeze
 
           def initialize(compute_service, managed_instance, options = {})
             @compute_service = compute_service
@@ -24,13 +25,21 @@ module Capistrano
             Time.parse(instance.creation_timestamp)
           end
 
-          def running?
-            instance.status == RUNNING_STATUS
+          def available?
+            running? && do_nothing?
           end
 
           private
 
           attr_reader :compute_service, :managed_instance, :options
+
+          def running?
+            managed_instance.instance_status == RUNNING_STATUS
+          end
+
+          def do_nothing?
+            managed_instance.current_action == NONE_ACTION
+          end
 
           def instance
             @instance ||= compute_service.get_instance(options.fetch(:gcp_project_id), instance_zone, instance_name)

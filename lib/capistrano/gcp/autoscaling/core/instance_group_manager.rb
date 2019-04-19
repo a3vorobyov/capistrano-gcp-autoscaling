@@ -11,7 +11,7 @@ module Capistrano
           end
 
           def instances
-            group_manager.managed_instances.map(&method(:instance_for)).select(&:running?).sort_by(&:created_at)
+            group_manager.managed_instances.map(&method(:instance_for)).select(&:available?).sort_by(&:created_at)
           end
 
           private

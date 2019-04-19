@@ -43,28 +43,28 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::InstanceGroupManager do
       instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
                       network_ip: '10.2.0.15',
                       created_at: Time.new(2019, 3, 26),
-                      running?: true)
+                      available?: true)
     end
 
     let(:instance2) do
       instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
                       network_ip: '10.2.0.16',
                       created_at: Time.new(2019, 2, 26),
-                      running?: true)
+                      available?: true)
     end
 
     let(:instance3) do
       instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
                       network_ip: '10.2.0.17',
                       created_at: Time.new(2019, 1, 26),
-                      running?: false)
+                      available?: false)
     end
 
     let(:instance4) do
       instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
                       network_ip: '10.2.0.18',
                       created_at: Time.new(2019, 4, 26),
-                      running?: true)
+                      available?: true)
     end
 
     before do
