@@ -94,8 +94,17 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::Instance do
         end
       end
 
-      context 'when an action is not NONE' do
+      context 'when an action is VERIFYING' do
         let(:action) { 'VERIFYING' }
+
+        it 'is expected to be true' do
+          subject.available?
+          expect(subject.available?).to be true
+        end
+      end
+
+      context 'when an action is not NONE and not VERIFYING' do
+        let(:action) { 'CREATING' }
 
         it 'is expected to be false' do
           subject.available?
@@ -116,8 +125,17 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::Instance do
         end
       end
 
-      context 'when an action is not NONE' do
+      context 'when an action is VERIFYING' do
         let(:action) { 'VERIFYING' }
+
+        it 'is expected to be false' do
+          subject.available?
+          expect(subject.available?).to be false
+        end
+      end
+
+      context 'when an action is not NONE and not VERIFYING' do
+        let(:action) { 'CREATING' }
 
         it 'is expected to be false' do
           subject.available?

@@ -10,6 +10,7 @@ module Capistrano
           SEPARATOR = '/'.freeze
           RUNNING_STATUS = 'RUNNING'.freeze
           NONE_ACTION = 'NONE'.freeze
+          VERIFYING_ACTION = 'VERIFYING'.freeze
 
           def initialize(compute_service, managed_instance, options = {})
             @compute_service = compute_service
@@ -26,7 +27,7 @@ module Capistrano
           end
 
           def available?
-            running? && do_nothing?
+            running? && (verifying? || do_nothing?)
           end
 
           private
@@ -39,6 +40,10 @@ module Capistrano
 
           def do_nothing?
             managed_instance.current_action == NONE_ACTION
+          end
+
+          def verifying?
+            managed_instance.current_action == VERIFYING_ACTION
           end
 
           def instance
