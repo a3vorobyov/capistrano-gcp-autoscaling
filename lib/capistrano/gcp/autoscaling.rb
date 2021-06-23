@@ -4,6 +4,7 @@ require 'googleauth'
 require 'google/apis/compute_v1'
 require 'capistrano/gcp/autoscaling/core/compute_service'
 require 'capistrano/gcp/autoscaling/core/instance'
+require 'capistrano/gcp/autoscaling/core/instance_group'
 require 'capistrano/gcp/autoscaling/core/instance_group_manager'
 
 load File.expand_path('tasks/autoscaling.rake', __dir__)

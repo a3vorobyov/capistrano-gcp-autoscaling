@@ -10,7 +10,7 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::InstanceGroupManager do
   let(:options) do
     {
       gcp_project_id: 'gcp_project_id',
-      gcp_region: 'us-east-1',
+      gcp_region: 'us-east1',
       group_manager_name: 'group_manager_name'
     }
   end
@@ -24,19 +24,19 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::InstanceGroupManager do
     let(:managed_instances) { [managed_instance1, managed_instance2, managed_instance3, managed_instance4] }
 
     let(:managed_instance1) do
-      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east-1-b/instances/instance-1')
+      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east1-b/instances/instance-1')
     end
 
     let(:managed_instance2) do
-      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east-1-c/instances/instance-2')
+      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east1-c/instances/instance-2')
     end
 
     let(:managed_instance3) do
-      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east-1-b/instances/instance-3')
+      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east1-b/instances/instance-3')
     end
 
     let(:managed_instance4) do
-      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east-1-c/instances/instance-4')
+      Google::Apis::ComputeV1::ManagedInstance.new(instance: 'gcp_project_id/zones/us-east1-c/instances/instance-4')
     end
 
     let(:instance1) do
