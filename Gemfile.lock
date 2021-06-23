@@ -142,7 +142,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler (>= 2.1.4)
   capistrano-gcp-autoscaling!
   rake (~> 13.0)
   rspec (~> 3.0)
@@ -150,4 +150,4 @@ DEPENDENCIES
   rubocop-rspec (~> 1.32)
 
 BUNDLED WITH
-   1.17.3
+   2.1.4
