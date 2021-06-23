@@ -29,3 +29,16 @@ def instance_group_manager(group_manager_name, properties = {})
     server instance.network_ip, block_given? ? yield(instance, index) : properties
   end
 end
+
+def instance_group(group_name, properties = {})
+  instance_group = Capistrano::Gcp::Autoscaling::Core::InstanceGroup.new(
+    compute_service,
+    gcp_project_id: fetch(:gcp_project_id),
+    gcp_zone: fetch(:gcp_zone),
+    group_name: group_name
+  )
+
+  instance_group.instances.each_with_index do |instance, index|
+    server instance.network_ip, block_given? ? yield(instance, index) : properties
+  end
+end

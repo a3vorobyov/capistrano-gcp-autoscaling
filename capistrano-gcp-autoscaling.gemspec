@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'capistrano-gcp-autoscaling'
   spec.version       = Capistrano::Gcp::Autoscaling::VERSION
   spec.authors       = ['Aleksei Vorobyov']
-  spec.email         = ['effypad@gmail.com']
+  spec.email         = ['a3.vorobyov@gmail.com']
 
   spec.summary       = 'Capistrano plugin for deploying to GCP instance groups'
   spec.description   = spec.summary
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.16'
+  spec.add_development_dependency 'bundler', '>= 2.1.4'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.66'

@@ -33,6 +33,7 @@ Read the documentation (https://cloud.google.com/iam/docs/creating-managing-serv
 ```ruby
 set :gcp_project_id, nil
 set :gcp_region, nil
+set :gcp_zone, nil
 set :gcp_scope, 'https://www.googleapis.com/auth/compute'
 set :gcp_private_key, ENV['GCP_PRIVATE_KEY']
 set :gcp_client_email, ENV['GCP_CLIENT_EMAIL']
@@ -46,6 +47,12 @@ To provide an instance group, go to deploy/<stage>.rb and instead of server writ
 instance_group_manager 'my-instance-group-manager1', user: 'apps', roles: %i(app web db)
 
 instance_group_manager 'my-instance-group-manager2' do |_instance, index|
+  index.zero? ? { user: 'apps', roles: %i(app web db) } : { user: 'apps', roles: %i(app web) }
+end
+
+instance_group 'my-instance-group1', user: 'apps', roles: %i(app web db)
+
+instance_group 'my-instance-group2' do |_instance, index|
   index.zero? ? { user: 'apps', roles: %i(app web db) } : { user: 'apps', roles: %i(app web) }
 end
 ```
