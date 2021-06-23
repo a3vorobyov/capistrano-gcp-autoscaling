@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'capistrano-gcp-autoscaling'
   spec.version       = Capistrano::Gcp::Autoscaling::VERSION
   spec.authors       = ['Aleksei Vorobyov']
-  spec.email         = ['effypad@gmail.com']
+  spec.email         = ['a3.vorobyov@gmail.com']
 
   spec.summary       = 'Capistrano plugin for deploying to GCP instance groups'
   spec.description   = spec.summary
