@@ -50,31 +50,19 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::InstanceGroup do
     end
 
     let(:instance1) do
-      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
-                      network_ip: '10.2.0.15',
-                      created_at: Time.new(2019, 3, 26),
-                      available?: true)
+      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance, network_ip: '10.2.0.15')
     end
 
     let(:instance2) do
-      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
-                      network_ip: '10.2.0.16',
-                      created_at: Time.new(2019, 2, 26),
-                      available?: true)
+      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance, network_ip: '10.2.0.16')
     end
 
     let(:instance3) do
-      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
-                      network_ip: '10.2.0.17',
-                      created_at: Time.new(2019, 1, 26),
-                      available?: false)
+      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance, network_ip: '10.2.0.17')
     end
 
     let(:instance4) do
-      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance,
-                      network_ip: '10.2.0.18',
-                      created_at: Time.new(2019, 4, 26),
-                      available?: true)
+      instance_double(Capistrano::Gcp::Autoscaling::Core::Instance, network_ip: '10.2.0.18')
     end
 
     before do
@@ -98,7 +86,7 @@ RSpec.describe Capistrano::Gcp::Autoscaling::Core::InstanceGroup do
     end
 
     it 'is expected to return a list of instances' do
-      expect(subject.instances).to eq [instance2, instance1, instance4]
+      expect(subject.instances).to match_array [instance1, instance2, instance3, instance4]
     end
   end
 end

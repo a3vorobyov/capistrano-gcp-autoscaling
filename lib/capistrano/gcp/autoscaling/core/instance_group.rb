@@ -11,7 +11,7 @@ module Capistrano
           end
 
           def instances
-            group.items.map(&method(:instance_for)).select(&:available?).sort_by(&:created_at)
+            group.items.map(&method(:instance_for))
           end
 
           private
